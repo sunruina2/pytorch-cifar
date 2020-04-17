@@ -46,12 +46,12 @@ image_transforms = {
     ])
 }
 
-pt = os.path.abspath()
-train_directory = str(pt.split('pytorch-cifat')[0])+'/dataset/train_data'
-valid_directory = str(pt.split('pytorch-cifat')[0])+'/dataset/test_data'
+pt = os.path.abspath('.').split('pytorch-cifar')[0]
+train_directory = pt+'dataset/train_data'
+valid_directory = pt+'dataset/test_data'
 print(train_directory)
 batch_size = 64
-num_classes = 10
+num_classes = 52
 
 data = {
     'train': torchvision.datasets.ImageFolder(root=train_directory, transform=image_transforms['train']),
