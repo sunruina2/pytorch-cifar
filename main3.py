@@ -51,7 +51,7 @@ pt = os.path.abspath('.').split('pytorch-cifar')[0]
 train_directory = pt + 'dataset/train_data'
 valid_directory = pt + 'dataset/test_data'
 print(train_directory)
-batch_size = 64
+batch_size = 8
 num_classes = 52
 
 data = {
@@ -136,7 +136,8 @@ print('==> Building model..')
 # net = SENet18()
 # net = ShuffleNetV2(1)
 # net = EfficientNetB0()
-net = RegNetX_200MF()
+#net = RegNetX_200MF()
+net = ResNet50()
 net = net.to(device)
 if device == 'cuda':
     net = torch.nn.DataParallel(net)
