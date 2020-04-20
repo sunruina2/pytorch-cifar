@@ -51,7 +51,7 @@ pt = os.path.abspath('.').split('pytorch-cifar')[0]
 train_directory = pt + 'dataset/train_data'
 valid_directory = pt + 'dataset/test_data'
 print(train_directory)
-batch_size = 64
+batch_size = 16
 num_classes = 52
 
 data = {
@@ -61,11 +61,13 @@ data = {
 }
 
 train_data_size = len(data['train'])
-trainloader = torch.utils.data.DataLoader(data['train'], batch_size=batch_size, shuffle=True)
+trainloader = torch.utils.data.DataLoader(data['train'], batch_size=batch_size, shuffle=True, num_workers=16,
+                                          pin_memory=True)
 print(train_data_size)
 
 valid_data_size = len(data['valid'])
-testloader = torch.utils.data.DataLoader(data['valid'], batch_size=batch_size, shuffle=True)
+testloader = torch.utils.data.DataLoader(data['valid'], batch_size=batch_size, shuffle=True, num_workers=16,
+                                         pin_memory=True)
 print(valid_data_size)
 
 classes = ('1001_1002_1003'
@@ -170,7 +172,7 @@ def train(epoch):
         print(inputs.shape)
         optimizer.zero_grad()
         outputs = net(inputs)
-        print(outputs.shape, targets.shape,'mark12')
+        print(outputs.shape, targets.shape, 'mark12')
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
